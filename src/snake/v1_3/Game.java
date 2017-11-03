@@ -230,7 +230,7 @@ public class Game {
 
 		StyleConstants.setForeground(style, Color.white);
 		StyleConstants.setFontSize(style, 12);
-		write("version 1.1\n", style);
+		write("version 1.3\n", style);
 		write("By: Jessey Harrymanoharan\n", style);
 		write("\n", style);
 		write("wasd or arrow keys to move\n", style);

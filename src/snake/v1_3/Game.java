@@ -121,23 +121,23 @@ public class Game {
 
 	private static void exec() {
 		initGame();
-		draw();
-		gameboi.update(snake, food, lastMove);
+		//draw();
+		gameboi.update(snake, food, lastMove, score, runTime);
 		move();
 		while (true) {
 			state = eventHandler(snake.getFirst());
 
 			if (state == MOVE) {
 				updateField();
-				draw();
-				gameboi.update(snake, food, lastMove);
+				//draw();
+				gameboi.update(snake, food, lastMove, score, runTime);
 				move();
 				frame.pack();
 			} else if (state == ATE_FOOD) {
 				eat(snake.getFirst());
 				updateField();
-				draw();
-				gameboi.update(snake, food, lastMove);
+				//draw();
+				gameboi.update(snake, food, lastMove, score, runTime);
 				if (snake.size() == 0) {
 					write("\nTHE SNAKE ATE POISON AND HAD\n", red);
 					write("NO BODY PARTS TO GIVE UP!!\n", red);
@@ -274,7 +274,7 @@ public class Game {
 		areaField.setFont(new Font("Courier New", Font.PLAIN, 12));
 		areaField.setPreferredSize(new Dimension(300, 230));
 		panel.add(gameboi);
-		panel.add(areaField);
+		//panel.add(areaField);
 		panel.setBackground(Color.BLACK);
 		frame.add(panel);
 		frame.setFocusable(true);
@@ -322,12 +322,13 @@ public class Game {
 
 		addFood(APPLE);
 		
-		gameboi.update(snake, food, lastMove);
+		gameboi.update(snake, food, lastMove, score, runTime);
 	}
-
+	
+	/*		OLD DRAWER FOR GUI
 	/**
 	 * draws the field to the GUI should follow an updateField call
-	 */
+	 *
 	private static void draw() {
 		clearDoc();
 		write("score: " + score + " \t\tTime: " + Math.round(runTime / 1000) + "\n", null);
@@ -361,7 +362,8 @@ public class Game {
 		write("\n" + message, null);
 		frame.pack();
 	}
-
+	*/
+	
 	/**
 	 * clears the document for the text pane
 	 */

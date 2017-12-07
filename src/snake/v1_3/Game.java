@@ -179,6 +179,9 @@ public class Game {
 	}
 
 	private static void restart() {
+		
+		gameboi.showRestartMenu();
+		frame.pack();
 		clearDoc();
 		StyleConstants.setForeground(style, Color.white);
 		StyleConstants.setFontSize(style, 24);
@@ -188,6 +191,8 @@ public class Game {
 		
 		StyleConstants.setAlignment(align, StyleConstants.ALIGN_CENTER);
 		doc.setParagraphAttributes(0, doc.getLength(), align, false);
+		
+		
 		
 		while (state == MENU) {
 			try {

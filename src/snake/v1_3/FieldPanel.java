@@ -31,7 +31,11 @@ public class FieldPanel extends JPanel {
 	public static StyledDocument doc = menu.getStyledDocument();
 	public static Style style = menu.addStyle("Style", null);
 	public static Style align = menu.addStyle("align", null);
-
+	public static JTextPane restartMenu = new JTextPane();
+	public static StyledDocument restartDoc = restartMenu.getStyledDocument();
+	public static Style style1 = restartMenu.addStyle("Style", null);
+	public static Style align1 = restartMenu.addStyle("align", null);
+	
 	private static ImageIcon SNAKE_HEAD_W;
 	private static ImageIcon SNAKE_HEAD_A;
 	private static ImageIcon SNAKE_HEAD_S;
@@ -63,6 +67,7 @@ public class FieldPanel extends JPanel {
 
 		gamefieldInitializer();
 		menuInitializer();
+		restartMenuInitializer();
 
 		scoreLabel.setText("score: 0 \t\tTime: 0");
 	}
@@ -104,16 +109,16 @@ public class FieldPanel extends JPanel {
 
 		StyleConstants.setForeground(style, Color.green);
 		StyleConstants.setFontSize(style, 24);
-		write("\n\n", style);
-		write("Snake++\n", style);
+		write(doc, "\n\n", style);
+		write(doc, "Snake++\n", style);
 
 		StyleConstants.setForeground(style, Color.white);
 		StyleConstants.setFontSize(style, 12);
-		write("version 1.3\n", style);
-		write("By: Jessey Harrymanoharan\n", style);
-		write("\n", style);
-		write("wasd or arrow keys to move\n", style);
-		write("click any key to continue", style);
+		write(doc, "version 1.3\n", style);
+		write(doc, "By: Jessey Harrymanoharan\n", style);
+		write(doc, "\n", style);
+		write(doc, "wasd or arrow keys to move\n", style);
+		write(doc, "click any key to continue", style);
 
 		StyleConstants.setAlignment(align, StyleConstants.ALIGN_CENTER);
 		doc.setParagraphAttributes(0, doc.getLength(), align, false);
@@ -126,9 +131,9 @@ public class FieldPanel extends JPanel {
 		}
 	}
 
-	private static void write(String s, Style style) {
+	private static void write(StyledDocument d, String s, Style style) {
 		try {
-			doc.insertString(doc.getLength(), s, style);
+			d.insertString(d.getLength(), s, style);
 		} catch (BadLocationException e) {
 			e.printStackTrace();
 		}
@@ -146,6 +151,23 @@ public class FieldPanel extends JPanel {
 			}
 		}
 	}
+	
+	private void restartMenuInitializer() {
+		restartMenu.setEditable(false);
+		restartMenu.setBackground(Color.BLACK);
+		restartMenu.setForeground(Color.WHITE);
+		restartMenu.setFont(new Font("Courier New", Font.PLAIN, 12));
+		restartMenu.setPreferredSize(new Dimension(300, 230));
+		
+		StyleConstants.setForeground(style1, Color.white);
+		StyleConstants.setFontSize(style1, 24);
+		write(restartDoc, "\n\n", style1);
+		write(restartDoc, "GAME OVER!!!\n", style1);
+		write(restartDoc, "press any key to resart!", null);
+		
+		StyleConstants.setAlignment(align1, StyleConstants.ALIGN_CENTER);
+		restartDoc.setParagraphAttributes(0, restartDoc.getLength(), align1, false);
+	}
 
 	public void showMenu() {
 		this.removeAll();
@@ -156,6 +178,11 @@ public class FieldPanel extends JPanel {
 		this.removeAll();
 		this.add(scoreLabel);
 		this.add(gamefield);
+	}
+	
+	public void showRestartMenu() {
+		this.removeAll();
+		this.add(restartMenu);
 	}
 
 	@SuppressWarnings("static-access")

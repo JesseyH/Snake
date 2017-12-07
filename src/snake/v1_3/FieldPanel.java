@@ -60,16 +60,13 @@ public class FieldPanel extends JPanel {
 		this.columns = columns;
 		this.rows = rows;
 		this.setLayout(new BoxLayout(this, 1));
-		
+
 		gamefieldInitializer();
 		menuInitializer();
 
 		scoreLabel.setText("score: 0 \t\tTime: 0");
-		this.add(menu);
-		this.add(scoreLabel);
-		this.add(gamefield);
 	}
-	
+
 	private void imageUpdater() {
 		try {
 			SNAKE_HEAD_W = new ImageIcon(ImageIO.read(getClass().getResource("/images/snake_head_w.png")));
@@ -92,20 +89,19 @@ public class FieldPanel extends JPanel {
 			APPLE = new ImageIcon(ImageIO.read(getClass().getResource("/images/apple.png")));
 			FIELD = new ImageIcon(ImageIO.read(getClass().getResource("/images/field.png")));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void menuInitializer() {
 		menu.setEditable(false);
 		menu.setBackground(Color.BLACK);
 		menu.setForeground(Color.WHITE);
 		menu.setFont(new Font("Courier New", Font.PLAIN, 12));
 		menu.setPreferredSize(new Dimension(300, 230));
-		
+
 		clearDoc();
-		
+
 		StyleConstants.setForeground(style, Color.green);
 		StyleConstants.setFontSize(style, 24);
 		write("\n\n", style);
@@ -118,18 +114,18 @@ public class FieldPanel extends JPanel {
 		write("\n", style);
 		write("wasd or arrow keys to move\n", style);
 		write("click any key to continue", style);
-		
+
 		StyleConstants.setAlignment(align, StyleConstants.ALIGN_CENTER);
 		doc.setParagraphAttributes(0, doc.getLength(), align, false);
 	}
-	
+
 	private static void clearDoc() {
 		try {
 			doc.remove(0, doc.getLength());
 		} catch (BadLocationException e) {
 		}
 	}
-	
+
 	private static void write(String s, Style style) {
 		try {
 			doc.insertString(doc.getLength(), s, style);
@@ -137,10 +133,10 @@ public class FieldPanel extends JPanel {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void gamefieldInitializer() {
 		gamefield.setLayout(new GridLayout(rows, columns));
-		gamefield.setPreferredSize(new Dimension(columns*14, rows*14));
+		gamefield.setPreferredSize(new Dimension(columns * 14, rows * 14));
 		FieldPanel.label = new JLabel[rows][columns];
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < columns; j++) {
@@ -149,6 +145,17 @@ public class FieldPanel extends JPanel {
 				gamefield.add(label[i][j]);
 			}
 		}
+	}
+
+	public void showMenu() {
+		this.removeAll();
+		this.add(menu);
+	}
+
+	public void showGame() {
+		this.removeAll();
+		this.add(scoreLabel);
+		this.add(gamefield);
 	}
 
 	@SuppressWarnings("static-access")
@@ -252,8 +259,8 @@ public class FieldPanel extends JPanel {
 	 * frame.add(label); frame.setVisible(true);
 	 * frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); frame.pack();
 	 * 
-	 * try { Thread.sleep(1000); } catch (InterruptedException e) { // TODO
-	 * Auto-generated catch block e.printStackTrace(); }
+	 * try { Thread.sleep(1000); } catch (InterruptedException e) { Auto-generated
+	 * catch block e.printStackTrace(); }
 	 * 
 	 * label.update(snake, food, lastMove); }
 	 */

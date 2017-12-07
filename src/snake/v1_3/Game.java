@@ -122,6 +122,8 @@ public class Game {
 	private static void exec() {
 		initGame();
 		//draw();
+		gameboi.showGame();
+		frame.pack();
 		gameboi.update(snake, food, lastMove, score, runTime);
 		move();
 		while (true) {
@@ -238,13 +240,15 @@ public class Game {
 		
 		StyleConstants.setAlignment(align, StyleConstants.ALIGN_CENTER);
 		doc.setParagraphAttributes(0, doc.getLength(), align, false);
-
+		
+		gameboi.showMenu();
+		frame.pack();
 		try {
 			Thread.sleep(50);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
+		
 		while (state == MENU) {
 			try {
 				Thread.sleep(500);
@@ -252,7 +256,7 @@ public class Game {
 				e.printStackTrace();
 			}
 		}
-
+		
 		StyleConstants.setAlignment(align, StyleConstants.ALIGN_LEFT);
 		doc.setParagraphAttributes(0, doc.getLength(), align, false);
 		exec();

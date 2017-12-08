@@ -35,6 +35,8 @@ public class FieldPanel extends JPanel {
 	public static StyledDocument restartDoc = restartMenu.getStyledDocument();
 	public static Style style1 = restartMenu.addStyle("Style", null);
 	public static Style align1 = restartMenu.addStyle("align", null);
+	public static JTextPane header = new JTextPane();
+	public static StyledDocument headerDoc = header.getStyledDocument();
 	
 	private static ImageIcon SNAKE_HEAD_W;
 	private static ImageIcon SNAKE_HEAD_A;
@@ -68,7 +70,8 @@ public class FieldPanel extends JPanel {
 		gamefieldInitializer();
 		menuInitializer();
 		restartMenuInitializer();
-
+		headerInitializer();
+		
 		scoreLabel.setText("score: 0 \t\tTime: 0");
 	}
 
@@ -168,7 +171,16 @@ public class FieldPanel extends JPanel {
 		StyleConstants.setAlignment(align1, StyleConstants.ALIGN_CENTER);
 		restartDoc.setParagraphAttributes(0, restartDoc.getLength(), align1, false);
 	}
-
+	
+	private void headerInitializer() {
+		header.setEditable(false);
+		header.setBackground(Color.BLACK);
+		header.setForeground(Color.GREEN);
+		header.setFont(new Font("Courier New", Font.PLAIN, 12));
+		
+		write(headerDoc, "Snake++", null);
+	}
+	
 	public void showMenu() {
 		this.removeAll();
 		this.add(menu);
@@ -176,6 +188,7 @@ public class FieldPanel extends JPanel {
 
 	public void showGame() {
 		this.removeAll();
+		this.add(header);
 		this.add(scoreLabel);
 		this.add(gamefield);
 	}
